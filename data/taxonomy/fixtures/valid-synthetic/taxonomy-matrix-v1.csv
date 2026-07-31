@@ -1,0 +1,4 @@
+schema_version,taxon_id,accepted_name,rank,parent_taxon_id,synonyms,region_karelia,region_murmansk,region_kola_peninsula,region_northwest_russia,regional_status,field_id_unsafe,dangerous_taxon,requires_expert_review,confusion_group_ids,evidence_status,review_status,notes_internal
+1.0.0,tx_testus,Testus,genus,,,false,false,false,false,NOT_ASSESSED,true,false,true,,SYNTHETIC,UNREVIEWED,Synthetic parent taxon for validator tests only
+1.0.0,tx_testus_borealis,Testus borealis,species,tx_testus,Testus borealis exemplaris,false,false,false,false,NOT_ASSESSED,true,false,true,cg_testus_contrast,SYNTHETIC,UNREVIEWED,Synthetic fixture; no biological claim
+1.0.0,tx_testus_obscurus,Testus obscurus,species,tx_testus,,false,false,false,false,NOT_ASSESSED,true,true,true,cg_testus_contrast,SYNTHETIC,UNREVIEWED,Synthetic fixture; dangerous flag exercises structure only

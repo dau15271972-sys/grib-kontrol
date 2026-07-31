@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "matrix_version": "1.0.0",
+  "records": [
+    {
+      "schema_version": "1.0.0",
+      "matrix_version": "1.0.0",
+      "review_id": "rv_tx_fungus_exemplaris",
+      "entity_type": "TAXON",
+      "entity_id": "tx_fungus_exemplaris",
+      "source_type": "SYNTHETIC_FIXTURE",
+      "bibliographic_citation": "Synthetic fixture only",
+      "source_locator": "synthetic://tx_fungus_exemplaris",
+      "accessed_date": null,
+      "license_info": "NOT_APPLICABLE",
+      "contributor_id": "synthetic_fixture_generator",
+      "evidence_status": "SYNTHETIC",
+      "review_status": "UNREVIEWED",
+      "reviewer_id": null,
+      "reviewed_date": null,
+      "reviewer_notes": "No expert identity is asserted."
+    }
+  ]
+}

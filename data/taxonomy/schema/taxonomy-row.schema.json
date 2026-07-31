@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grib-kontrol.invalid/schema/taxonomy-row.schema.json",
+  "title": "Taxonomy Matrix v1 row",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "taxon_id",
+    "accepted_name",
+    "rank",
+    "parent_taxon_id",
+    "synonyms",
+    "region_karelia",
+    "region_murmansk",
+    "region_kola_peninsula",
+    "region_northwest_russia",
+    "regional_status",
+    "field_id_unsafe",
+    "dangerous_taxon",
+    "requires_expert_review",
+    "confusion_group_ids",
+    "evidence_status",
+    "review_status",
+    "notes_internal"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "const": "1.0.0"},
+    "taxon_id": {
+      "type": "string",
+      "pattern": "^tx_[a-z0-9]+(?:_[a-z0-9]+)*$"
+    },
+    "accepted_name": {"type": "string", "minLength": 1},
+    "rank": {
+      "type": "string",
+      "enum": ["species", "genus", "section", "complex", "group"]
+    },
+    "parent_taxon_id": {
+      "type": ["string", "null"],
+      "pattern": "^tx_[a-z0-9]+(?:_[a-z0-9]+)*$"
+    },
+    "synonyms": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "region_karelia": {"type": "boolean"},
+    "region_murmansk": {"type": "boolean"},
+    "region_kola_peninsula": {"type": "boolean"},
+    "region_northwest_russia": {"type": "boolean"},
+    "regional_status": {
+      "type": "string",
+      "enum": ["NOT_ASSESSED", "REPORTED", "VERIFIED", "EXCLUDED"]
+    },
+    "field_id_unsafe": {"type": "boolean"},
+    "dangerous_taxon": {"type": "boolean"},
+    "requires_expert_review": {"type": "boolean"},
+    "confusion_group_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^cg_[a-z0-9]+(?:_[a-z0-9]+)*$"
+      },
+      "uniqueItems": true
+    },
+    "evidence_status": {
+      "type": "string",
+      "enum": ["NO_EVIDENCE", "SOURCE_RECORDED", "EVIDENCE_VERIFIED", "SYNTHETIC"]
+    },
+    "review_status": {
+      "type": "string",
+      "enum": ["UNREVIEWED", "REVIEW_REQUIRED", "APPROVED", "REJECTED"]
+    },
+    "notes_internal": {"type": "string"}
+  }
+}

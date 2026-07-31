@@ -1,0 +1,2 @@
+schema_version,taxon_id,accepted_name,rank,parent_taxon_id,synonyms,region_karelia,region_murmansk,region_kola_peninsula,region_northwest_russia,regional_status,field_id_unsafe,dangerous_taxon,requires_expert_review,confusion_group_ids,evidence_status,review_status,notes_internal,edible
+1.0.0,tx_fungus_exemplaris,Fungus exemplaris,species,,,false,false,false,false,NOT_ASSESSED,true,false,true,,SYNTHETIC,UNREVIEWED,Intentionally invalid synthetic fixture,false

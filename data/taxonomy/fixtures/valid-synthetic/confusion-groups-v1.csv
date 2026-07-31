@@ -1,0 +1,2 @@
+schema_version,group_id,group_name_internal,member_taxon_ids,dangerous_member_taxon_ids,confusion_basis,required_view_types,minimum_resolution_rank,requires_expert_review,evidence_status,review_status,notes_internal
+1.0.0,cg_testus_contrast,Synthetic Testus contrast,tx_testus_borealis|tx_testus_obscurus,tx_testus_obscurus,SYNTHETIC,CAP_TOP|UNDERSIDE|STEM_BASE|SIDE,genus,true,SYNTHETIC,UNREVIEWED,Synthetic relation only; not a user result

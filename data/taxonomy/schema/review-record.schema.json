@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grib-kontrol.invalid/schema/review-record.schema.json",
+  "title": "Taxonomy provenance and review record v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "matrix_version",
+    "review_id",
+    "entity_type",
+    "entity_id",
+    "source_type",
+    "bibliographic_citation",
+    "source_locator",
+    "accessed_date",
+    "license_info",
+    "contributor_id",
+    "evidence_status",
+    "review_status",
+    "reviewer_id",
+    "reviewed_date",
+    "reviewer_notes"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "const": "1.0.0"},
+    "matrix_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "review_id": {
+      "type": "string",
+      "pattern": "^rv_[a-z0-9]+(?:_[a-z0-9]+)*$"
+    },
+    "entity_type": {"type": "string", "enum": ["TAXON", "CONFUSION_GROUP"]},
+    "entity_id": {"type": "string", "minLength": 1},
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "PEER_REVIEWED_PUBLICATION",
+        "MONOGRAPH",
+        "TAXONOMIC_DATABASE",
+        "REGIONAL_CHECKLIST",
+        "EXPERT_OBSERVATION",
+        "SYNTHETIC_FIXTURE"
+      ]
+    },
+    "bibliographic_citation": {"type": ["string", "null"]},
+    "source_locator": {"type": ["string", "null"]},
+    "accessed_date": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "format": "date"
+    },
+    "license_info": {"type": ["string", "null"]},
+    "contributor_id": {"type": "string", "minLength": 1},
+    "evidence_status": {
+      "type": "string",
+      "enum": ["NO_EVIDENCE", "SOURCE_RECORDED", "EVIDENCE_VERIFIED", "SYNTHETIC"]
+    },
+    "review_status": {
+      "type": "string",
+      "enum": ["UNREVIEWED", "REVIEW_REQUIRED", "APPROVED", "REJECTED"]
+    },
+    "reviewer_id": {"type": ["string", "null"]},
+    "reviewed_date": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "format": "date"
+    },
+    "reviewer_notes": {"type": ["string", "null"]}
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grib-kontrol.invalid/schema/confusion-group.schema.json",
+  "title": "Dangerous confusion group v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "group_id",
+    "group_name_internal",
+    "member_taxon_ids",
+    "dangerous_member_taxon_ids",
+    "confusion_basis",
+    "required_view_types",
+    "minimum_resolution_rank",
+    "requires_expert_review",
+    "evidence_status",
+    "review_status",
+    "notes_internal"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "const": "1.0.0"},
+    "group_id": {
+      "type": "string",
+      "pattern": "^cg_[a-z0-9]+(?:_[a-z0-9]+)*$"
+    },
+    "group_name_internal": {"type": "string", "minLength": 1},
+    "member_taxon_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^tx_[a-z0-9]+(?:_[a-z0-9]+)*$"
+      },
+      "minItems": 2,
+      "uniqueItems": true
+    },
+    "dangerous_member_taxon_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^tx_[a-z0-9]+(?:_[a-z0-9]+)*$"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "confusion_basis": {
+      "type": "string",
+      "enum": [
+        "MORPHOLOGICAL",
+        "MACROSCOPIC_OVERLAP",
+        "INSUFFICIENT_FIELD_CHARACTERS",
+        "SYNTHETIC"
+      ]
+    },
+    "required_view_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["CAP_TOP", "UNDERSIDE", "STEM_BASE", "SIDE"]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "minimum_resolution_rank": {
+      "type": "string",
+      "enum": ["species", "genus", "section", "complex", "group"]
+    },
+    "requires_expert_review": {"type": "boolean", "const": true},
+    "evidence_status": {
+      "type": "string",
+      "enum": ["NO_EVIDENCE", "SOURCE_RECORDED", "EVIDENCE_VERIFIED", "SYNTHETIC"]
+    },
+    "review_status": {
+      "type": "string",
+      "enum": ["UNREVIEWED", "REVIEW_REQUIRED", "APPROVED", "REJECTED"]
+    },
+    "notes_internal": {"type": "string"}
+  }
+}
