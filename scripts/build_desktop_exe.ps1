@@ -1,5 +1,6 @@
 param(
-    [string]$ExeName = "GribKontrolDesktop"
+    [string]$ExeName = "GribKontrolDesktop",
+    [switch]$Production
 )
 
 $ErrorActionPreference = "Stop"
@@ -11,8 +12,17 @@ if (-not (Test-Path $pythonExe)) {
     throw "Не найден .venv\\Scripts\\python.exe. Сначала настройте окружение и установите зависимости."
 }
 
-& $pythonExe -m pip install --upgrade pip
-& $pythonExe -m pip install pyinstaller
+& $pythonExe -c "import PyInstaller" 2>$null
+if ($LASTEXITCODE -ne 0) {
+    throw "PyInstaller is not installed. Run: .venv\Scripts\python.exe -m pip install -r requirements-dev.txt"
+}
+
+if ($Production) {
+    & $pythonExe "scripts\medical_placeholder_gate.py" "--production"
+    if ($LASTEXITCODE -ne 0) {
+        throw "SAFETY: production desktop build is blocked by unapproved medical copy."
+    }
+}
 
 $cmd = @(
     "-m", "PyInstaller",
@@ -20,7 +30,6 @@ $cmd = @(
     "--onedir",
     "--name", $ExeName,
     "--add-data", "templates;templates",
-    "--add-data", "data;data",
     "desktop/run_desktop.py"
 )
 
