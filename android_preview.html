@@ -133,7 +133,7 @@
       border: 1px solid #d8ddd2;
     }
     .danger { border-left: 5px solid var(--danger); }
-    .ok { border-left: 5px solid var(--ok); }
+    .unavailable { border-left: 5px solid #9a6a20; }
     .risk {
       background: #ffe7e7;
       border: 1px solid #f3b2b2;
@@ -191,42 +191,47 @@
         <div class="hero">
           <div class="hero-brand">ГРИБ КОНТРОЛЬ</div>
         </div>
-        <p class="hint">Сделайте 2 фото: верх шляпки и нижняя сторона.</p>
+        <p class="hint">Сделайте 4 фото одного гриба с разных ракурсов.</p>
 
           <div class="row">
-            <button>Фото сверху</button>
-            <button>Фото снизу</button>
+            <button>Шляпка сверху</button>
+            <button>Снизу</button>
+          </div>
+          <div class="row">
+            <button>Основание ножки</button>
+            <button>Сбоку</button>
+          </div>
+          <div class="row">
+            <button>Снять выбранный ракурс</button>
             <button>Проверить</button>
           </div>
 
           <div class="photo-grid">
             <div class="photo">Верхняя сторона<div class="img"></div></div>
             <div class="photo">Нижняя сторона<div class="img" style="background:radial-gradient(circle at 55% 35%, #dbc59b, #947353 52%, #6f5641 75%), linear-gradient(180deg,#ddd3c0,#c3b39a)"></div></div>
+            <div class="photo">Основание ножки<div class="img"></div></div>
+            <div class="photo">Боковой ракурс<div class="img" style="background:radial-gradient(circle at 55% 35%, #dbc59b, #947353 52%, #6f5641 75%), linear-gradient(180deg,#ddd3c0,#c3b39a)"></div></div>
           </div>
 
         <div class="card danger">
           Важно: распознавание по фото не является экспертизой. Не употребляйте гриб без проверки специалистом.
         </div>
 
-        <div class="card ok">
-          <div class="tag">СЪЕДОБНЫЙ</div>
-            <b>Белый гриб (Boletus edulis)</b><br>
-            Съедобность: съедобный<br>
-            Опасность: низкая при точном определении<br>
-            Уверенность: 89.3%<br>
-            2-й тест: пройден (88.6%)<br>
-            3-й тест: пройден (87.9%)<br><br>
-            Похожие виды: Желчный гриб
+        <div class="card unavailable">
+          <div class="tag">РАСПОЗНАВАНИЕ НЕДОСТУПНО</div>
+            <b>Проверенная модель не установлена</b><br>
+            По фотографиям нельзя надёжно исключить опасный вариант.<br><br>
+            Приложение не даёт разрешений на сбор, приготовление или употребление.
           </div>
 
         <button class="history-toggle" id="historyToggle" type="button">
-          Последние распознавания
+          История оценок
         </button>
         <div class="history-panel" id="historyPanel">
           <div class="hist">
-            12.04.2026 14:20 | Белый гриб | 89.3%<br>
-            12.04.2026 13:54 | Требуется проверка | 71.5%<br>
-            12.04.2026 12:03 | Лисичка настоящая | 86.1%
+            12.04.2026 14:20 | Распознавание недоступно<br>
+            12.04.2026 13:54 | Нужны дополнительные фото<br>
+            12.04.2026 12:03 | Техническая ошибка
           </div>
         </div>
       </div>
@@ -237,7 +242,7 @@
     const historyPanel = document.getElementById("historyPanel");
     historyToggle.addEventListener("click", () => {
       const isOpen = historyPanel.classList.toggle("open");
-      historyToggle.textContent = isOpen ? "Скрыть распознавания" : "Последние распознавания";
+      historyToggle.textContent = isOpen ? "Скрыть историю" : "История оценок";
     });
   </script>
 </body>
