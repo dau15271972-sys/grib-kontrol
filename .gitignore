@@ -1,6 +1,9 @@
 .venv/
 .runtime_tmp/
 .tmp/
+.idea/
+.pytest_cache/
+.gradle/
 
 __pycache__/
 *.py[cod]
@@ -13,6 +16,9 @@ android-app/.gradle/
 android-app/local.properties
 android-app/app/build/
 android-app/build/
+local.properties
+*.apk
+*.exe
 
 *.log
 Thumbs.db
