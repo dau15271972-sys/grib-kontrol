@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from app.main import create_app
+from app.main import create_app  # noqa: E402
 
 
 def find_free_port(start: int = 8000, end: int = 8099) -> int:

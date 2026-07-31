@@ -15,17 +15,9 @@ import androidx.room.RoomDatabase
 data class HistoryEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val createdAt: Long,
-    val status: String,
-    val nameRu: String?,
-    val nameLatin: String?,
-    val edibility: String?,
-    val dangerLevel: String?,
-    val confidence: Double?,
-    val secondConfidence: Double?,
-    val thirdConfidence: Double?,
-    val recommendation: String?,
-    val riskLevel: String?,
-    val riskReason: String?
+    val status: ResultStatus,
+    val title: String,
+    val message: String
 )
 
 @Dao
@@ -37,7 +29,7 @@ interface HistoryDao {
     suspend fun latest(limit: Int): List<HistoryEntity>
 }
 
-@Database(entities = [HistoryEntity::class], version = 2, exportSchema = false)
+@Database(entities = [HistoryEntity::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun historyDao(): HistoryDao
 

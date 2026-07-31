@@ -5,66 +5,52 @@ from pathlib import Path
 
 from flask import Flask, jsonify, render_template, request
 
-from app.recognizer import MushroomRecognizer
-
+from app.artifacts import ArtifactBundleManifest, ArtifactCompatibilityGate
+from app.inference import InferenceEngine, NoModelInferenceEngine, SafeInferenceRunner
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-KNOWLEDGE_PATH = BASE_DIR / "data" / "knowledge_base.json"
-RECOGNITION_PATH = BASE_DIR / "data" / "recognition_index.json"
 
 
-def create_app() -> Flask:
+def create_app(
+    engine: InferenceEngine | None = None,
+    compatibility_gate: ArtifactCompatibilityGate | None = None,
+    manifest: ArtifactBundleManifest | None = None,
+) -> Flask:
     app = Flask(__name__, template_folder=str(BASE_DIR / "templates"))
     app.config["MAX_CONTENT_LENGTH"] = 12 * 1024 * 1024  # 12 MB
-    app.config["UPLOAD_EXTENSIONS"] = {".jpg", ".jpeg", ".png", ".webp"}
-
-    recognizer = MushroomRecognizer(
-        knowledge_path=KNOWLEDGE_PATH,
-        recognition_path=RECOGNITION_PATH,
+    inference_runner = SafeInferenceRunner(
+        engine or NoModelInferenceEngine(),
+        compatibility_gate,
+        manifest,
     )
 
     @app.get("/")
     def index():
-        return render_template("index.html")
+        return render_template(
+            "index.html",
+            result=inference_runner.infer().to_dict(),
+        )
 
     @app.post("/predict")
     def predict():
         uploaded = request.files.get("photo")
-        if not uploaded or uploaded.filename is None or not uploaded.filename.strip():
-            return render_template("index.html", error="Загрузите фотографию гриба.")
-
-        ext = Path(uploaded.filename).suffix.lower()
-        if ext not in app.config["UPLOAD_EXTENSIONS"]:
-            return render_template("index.html", error="Поддерживаются JPG, PNG, WEBP.")
-
-        image_bytes = uploaded.read()
-        try:
-            result = recognizer.predict(image_bytes)
-        except Exception as exc:  # defensive message for UI
-            return render_template(
-                "index.html",
-                error=f"Не удалось обработать изображение: {exc}",
-            )
-
-        return render_template("index.html", result=result)
+        image_bytes = uploaded.read() if uploaded else None
+        result = inference_runner.infer(image_bytes)
+        return render_template("index.html", result=result.to_dict())
 
     @app.post("/api/predict")
     def api_predict():
         uploaded = request.files.get("photo")
-        if not uploaded or uploaded.filename is None or not uploaded.filename.strip():
-            return jsonify({"error": "Загрузите фотографию гриба."}), 400
+        image_bytes = uploaded.read() if uploaded else None
+        result = inference_runner.infer(image_bytes)
+        if result.status.value == "TECHNICAL_FAILURE":
+            return jsonify(result.to_dict()), 500
 
-        ext = Path(uploaded.filename).suffix.lower()
-        if ext not in app.config["UPLOAD_EXTENSIONS"]:
-            return jsonify({"error": "Поддерживаются JPG, PNG, WEBP."}), 400
+        return jsonify(result.to_dict()), 503
 
-        image_bytes = uploaded.read()
-        try:
-            result = recognizer.predict(image_bytes)
-        except Exception as exc:
-            return jsonify({"error": f"Не удалось обработать изображение: {exc}"}), 500
-
-        return jsonify(result)
+    @app.get("/emergency")
+    def emergency():
+        return render_template("emergency.html")
 
     return app
 
@@ -74,4 +60,4 @@ app = create_app()
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", "8000"))
-    app.run(host="0.0.0.0", port=port, debug=True)
+    app.run(host="127.0.0.1", port=port, debug=False)
