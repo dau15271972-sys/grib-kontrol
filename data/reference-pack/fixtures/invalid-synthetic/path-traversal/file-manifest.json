@@ -1,0 +1,6 @@
+{
+  "file_manifest_version": "1.0.0",
+  "files": [
+    {"path": "../outside.json", "size_bytes": 0, "sha256": "0000000000000000000000000000000000000000000000000000000000000000", "role": "INVALID_PATH_TRAVERSAL"}
+  ]
+}

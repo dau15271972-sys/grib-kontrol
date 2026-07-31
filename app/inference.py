@@ -45,7 +45,7 @@ class InferenceEngine(Protocol):
 
 
 class NoModelInferenceEngine:
-    """SAFETY: the only Stage A engine; it never guesses a taxon."""
+    """SAFETY: Stage B0 shell engine; it never guesses without a trusted pack."""
 
     descriptor: ModelDescriptor | None = None
 
@@ -55,7 +55,7 @@ class NoModelInferenceEngine:
             status=ResultStatus.RECOGNITION_UNAVAILABLE,
             title="Распознавание недоступно",
             message=(
-                "Совместимая проверенная модель не установлена. "
+                "Активный проверенный автономный пакет знаний не установлен. "
                 "По фотографии нельзя надёжно исключить опасный вариант."
             ),
             safety_banner=(
@@ -94,17 +94,17 @@ class SafeInferenceRunner:
 
         descriptor = getattr(self._engine, "descriptor", ...)
         if descriptor is ...:
-            return self._run_engine(image_bytes)
+            return NoModelInferenceEngine().infer(image_bytes)
         if descriptor is None:
             return NoModelInferenceEngine().infer(image_bytes)
         if self._compatibility_gate is None or self._manifest is None:
-            return technical_failure_result()
+            return NoModelInferenceEngine().infer(image_bytes)
 
         compatibility = self._compatibility_gate.validate(descriptor, self._manifest)
         if compatibility.status is CompatibilityStatus.NO_MODEL:
             return NoModelInferenceEngine().infer(image_bytes)
         if compatibility.status is CompatibilityStatus.INCOMPATIBLE:
-            return technical_failure_result()
+            return NoModelInferenceEngine().infer(image_bytes)
         return self._run_engine(image_bytes)
 
     def _run_engine(self, image_bytes: bytes | None) -> InferenceResult:

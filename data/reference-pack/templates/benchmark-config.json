@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0.0",
+  "synthetic_vector_counts": [10000, 100000, 1000000],
+  "recall_at": [10, 50, 100],
+  "latency_percentiles": [50, 95, 99],
+  "metrics": ["open_latency", "cold_query_latency", "warm_query_latency", "peak_rss", "index_size", "multi_view_latency"],
+  "baseline": "EXACT_BASELINE",
+  "minimum_production_recall": "OPEN_SAFETY_PARAMETER"
+}

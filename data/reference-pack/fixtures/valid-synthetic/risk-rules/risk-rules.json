@@ -1,0 +1,5 @@
+{
+  "risk_rules_version": "synthetic-risk-rules-v1",
+  "status": "NO_PRODUCTION_RISK_ENGINE",
+  "production_approved": false
+}

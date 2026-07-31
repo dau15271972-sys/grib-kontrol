@@ -1,0 +1,6 @@
+{
+  "fixture": "synthetic",
+  "seed": 15271972,
+  "algorithm": "EXACT_BASELINE",
+  "production_approved": false
+}

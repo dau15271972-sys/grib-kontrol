@@ -1,0 +1,6 @@
+{
+  "schema_version": "1.0.0",
+  "taxonomy_version": "1.0.0",
+  "synthetic": true,
+  "taxon_ids": ["tx_synthetic_alpha", "tx_synthetic_beta", "tx_synthetic_gamma"]
+}

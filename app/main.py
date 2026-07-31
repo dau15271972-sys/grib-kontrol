@@ -5,23 +5,16 @@ from pathlib import Path
 
 from flask import Flask, jsonify, render_template, request
 
-from app.artifacts import ArtifactBundleManifest, ArtifactCompatibilityGate
-from app.inference import InferenceEngine, NoModelInferenceEngine, SafeInferenceRunner
+from app.inference import NoModelInferenceEngine, SafeInferenceRunner
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-def create_app(
-    engine: InferenceEngine | None = None,
-    compatibility_gate: ArtifactCompatibilityGate | None = None,
-    manifest: ArtifactBundleManifest | None = None,
-) -> Flask:
+def create_app() -> Flask:
     app = Flask(__name__, template_folder=str(BASE_DIR / "templates"))
     app.config["MAX_CONTENT_LENGTH"] = 12 * 1024 * 1024  # 12 MB
     inference_runner = SafeInferenceRunner(
-        engine or NoModelInferenceEngine(),
-        compatibility_gate,
-        manifest,
+        NoModelInferenceEngine(),
     )
 
     @app.get("/")

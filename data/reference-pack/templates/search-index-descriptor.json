@@ -1,0 +1,13 @@
+{
+  "region_id": "REPLACE_WITH_REGION_ID",
+  "view_type": "CAP_TOP",
+  "embedding_model_id": "REPLACE_WITH_EMBEDDING_MODEL_ID",
+  "embedding_dimension": 1,
+  "index_format_version": "REPLACE_WITH_INDEX_FORMAT_VERSION",
+  "engine": "USEARCH_HNSW",
+  "engine_version": "REPLACE_WITH_ENGINE_VERSION",
+  "metric": "REPLACE_WITH_METRIC",
+  "vector_count": 0,
+  "shard_count": 1,
+  "loading_mode": "MEMORY_MAPPED"
+}

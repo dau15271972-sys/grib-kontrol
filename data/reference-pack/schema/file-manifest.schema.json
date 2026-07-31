@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grib-kontrol.invalid/schema/reference-pack/file-manifest.schema.json",
+  "title": "Offline knowledge pack file manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["file_manifest_version", "files"],
+  "properties": {
+    "file_manifest_version": {"type": "string", "const": "1.0.0"},
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "size_bytes", "sha256", "role"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "size_bytes": {"type": "integer", "minimum": 0, "maximum": 9223372036854775807},
+          "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "role": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0.0",
+  "confusion_groups_version": "1.0.0",
+  "synthetic": true,
+  "groups": [
+    {"group_id": "cg_synthetic_alpha_gamma", "members": ["tx_synthetic_alpha", "tx_synthetic_gamma"], "dangerous_members": ["tx_synthetic_gamma"]}
+  ]
+}

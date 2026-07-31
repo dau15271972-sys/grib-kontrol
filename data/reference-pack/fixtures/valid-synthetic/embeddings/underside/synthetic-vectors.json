@@ -1,0 +1,9 @@
+{
+  "embedding_model_id": "synthetic-embedding-model",
+  "embedding_dimension": 4,
+  "embedding_dtype": "float32",
+  "vectors": [
+    {"observation_id": "obs_alpha", "thumbnail_id": "thumb_alpha_2", "taxon_id": "tx_synthetic_alpha", "values": [0.9, 0.1, 0.0, 0.0]},
+    {"observation_id": "obs_gamma", "thumbnail_id": "thumb_gamma_1", "taxon_id": "tx_synthetic_gamma", "values": [0.0, 0.0, 1.0, 0.0]}
+  ]
+}

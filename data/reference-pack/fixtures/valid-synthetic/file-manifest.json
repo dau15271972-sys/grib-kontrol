@@ -1,0 +1,20 @@
+{
+  "file_manifest_version": "1.0.0",
+  "files": [
+    {"path": "calibration/calibration.json", "size_bytes": 128, "sha256": "6021088a7379060c952668f66632cc9fc53e2d9a63a1f34e5bc9c9b1e955997b", "role": "CALIBRATION"},
+    {"path": "embeddings/cap-top/synthetic-vectors.json", "size_bytes": 404, "sha256": "d93a2dcadb18fd53da2a2f40c3c6155091746771127fb6a8b2eb4ce066df8269", "role": "SYNTHETIC_EMBEDDINGS"},
+    {"path": "embeddings/embedding-contract.json", "size_bytes": 179, "sha256": "1163817e30ff2d633ff2eeaeb311627467679285339c7957f55c2efb734bbe6e", "role": "EMBEDDING_CONTRACT"},
+    {"path": "embeddings/underside/synthetic-vectors.json", "size_bytes": 407, "sha256": "ea470cf761961c7c28e2f264896d27e501d8932d52316594a359b86bbed57621", "role": "SYNTHETIC_EMBEDDINGS"},
+    {"path": "licenses/attribution.json", "size_bytes": 90, "sha256": "5224b75a18fba888813fd23b5f4354532ca0fea421a0217670b1fee5f1c6ccb4", "role": "LICENSE_MANIFEST"},
+    {"path": "licenses/source-registry.json", "size_bytes": 84, "sha256": "04ee33b35d22b6b51f8cfb2e6df9ccd7a76391b7bdc79f353547332a726f57ab", "role": "SOURCE_REGISTRY"},
+    {"path": "metadata/reference.json", "size_bytes": 361, "sha256": "9bd00288940f1ac1dfbef568f7ef14ba40814706c229b971adee1311c91ba18d", "role": "REFERENCE_METADATA"},
+    {"path": "model/synthetic-model-contract.json", "size_bytes": 158, "sha256": "17075656ac85fe197548e4e469b8ee82c604519bb1f8aaefed0f7a986606d4fe", "role": "MODEL_CONTRACT_NO_WEIGHTS"},
+    {"path": "open-set/rejection-contract.json", "size_bytes": 121, "sha256": "57811e5cc01b3adc0511c1aa97d699b1285c42b84956a0c715b68eaf64a08f32", "role": "OPEN_SET"},
+    {"path": "risk-rules/risk-rules.json", "size_bytes": 127, "sha256": "aa42d5566aed8427b739303565ce847889968ddbcd0c4f001c2963644d0f0661", "role": "RISK_RULES_PLACEHOLDER"},
+    {"path": "search-index/benchmark-report.json", "size_bytes": 186, "sha256": "f2e4faf886ac0093bd4dc129eb49cba827cbcb50d309c9738b7d70b2d8b44827", "role": "BENCHMARK_REPORT"},
+    {"path": "search-index/build-config.json", "size_bytes": 114, "sha256": "b4b9df8313c82f759c2c27e25619e12b87158d9d930436732949cc97be6182ba", "role": "INDEX_BUILD_CONFIG"},
+    {"path": "search-index/exact-baseline-index.json", "size_bytes": 188, "sha256": "fab3f9176f8ebc77a55feedf72b9a43d84e9d7f204c437da7f442439bc42d88a", "role": "SYNTHETIC_EXACT_INDEX"},
+    {"path": "taxonomy/confusion-groups.json", "size_bytes": 258, "sha256": "8787920dbe73f6fd0429bf4c2955574420a7e6854cff6f178d910425a1993573", "role": "CONFUSION_GROUPS"},
+    {"path": "taxonomy/taxonomy.json", "size_bytes": 166, "sha256": "beab3c925ed7ebb01c9c1826887a7beee81f76e7f9af5cb35193fc62035353bb", "role": "TAXONOMY"}
+  ]
+}

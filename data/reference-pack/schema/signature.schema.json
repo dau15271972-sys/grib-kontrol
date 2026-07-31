@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grib-kontrol.invalid/schema/reference-pack/signature.schema.json",
+  "title": "Offline knowledge pack detached signature envelope v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "algorithm", "signing_key_id", "manifest_sha256",
+    "file_manifest_sha256", "checksums_sha256", "signature"
+  ],
+  "properties": {
+    "algorithm": {"type": "string", "const": "ED25519"},
+    "signing_key_id": {"type": "string", "minLength": 1},
+    "manifest_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "file_manifest_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "checksums_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "signature": {"type": "string", "minLength": 1}
+  }
+}

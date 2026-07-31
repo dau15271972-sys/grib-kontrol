@@ -22,6 +22,15 @@ jobs:
       - run: python -m pytest
       - name: Validate Taxonomy Matrix v1
         run: python scripts/validate_taxonomy.py
+      - name: Validate mandatory offline reference pack contract
+        run: python scripts/validate_reference_pack.py
+      - name: Prove synthetic reference pack cannot activate
+        shell: bash
+        run: |
+          if python scripts/validate_reference_pack.py --require-production; then
+            echo "SAFETY gate unexpectedly allowed synthetic production pack"
+            exit 1
+          fi
       - name: Forbidden UI phrase and unbound model asset gates
         run: python scripts/safety_gate.py
       - name: Validate explicit medical placeholder

@@ -1,0 +1,11 @@
+{
+  "file_manifest_version": "1.0.0",
+  "files": [
+    {
+      "path": "replace-me",
+      "size_bytes": 0,
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "role": "REPLACE_ME"
+    }
+  ]
+}

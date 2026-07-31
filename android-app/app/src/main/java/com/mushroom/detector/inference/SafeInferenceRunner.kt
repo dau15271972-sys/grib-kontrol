@@ -15,11 +15,11 @@ class SafeInferenceRunner(
     // SAFETY: every registered model must pass the exact artifact contract.
     fun run(session: ObservationSession): MushroomApiResponse {
         val descriptor = engine.descriptor ?: return NoModelInferenceEngine().infer(session)
-        val gate = compatibilityGate ?: return technicalFailure()
-        val bundleManifest = manifest ?: return technicalFailure()
+        val gate = compatibilityGate ?: return NoModelInferenceEngine().infer(session)
+        val bundleManifest = manifest ?: return NoModelInferenceEngine().infer(session)
         when (gate.validate(descriptor, bundleManifest).status) {
             CompatibilityStatus.NO_MODEL -> return NoModelInferenceEngine().infer(session)
-            CompatibilityStatus.INCOMPATIBLE -> return technicalFailure()
+            CompatibilityStatus.INCOMPATIBLE -> return NoModelInferenceEngine().infer(session)
             CompatibilityStatus.COMPATIBLE -> Unit
         }
 

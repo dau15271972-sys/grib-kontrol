@@ -1,0 +1,7 @@
+{
+  "embedding_model_id": "synthetic-embedding-model",
+  "embedding_dimension": 4,
+  "embedding_dtype": "float32",
+  "view_types": ["CAP_TOP", "UNDERSIDE"],
+  "synthetic": true
+}

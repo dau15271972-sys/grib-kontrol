@@ -1,0 +1,7 @@
+{
+  "index_format_version": "exact-json-v1",
+  "engine": "EXACT_BASELINE",
+  "metric": "COSINE_DISTANCE_INTERNAL_ONLY",
+  "vector_count": 4,
+  "loading_mode": "SYNTHETIC_IN_MEMORY_ONLY"
+}

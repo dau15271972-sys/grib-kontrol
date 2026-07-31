@@ -1,0 +1,6 @@
+{
+  "contract_version": "model-contract-v1",
+  "model_id": "synthetic-model",
+  "model_kind": "NO_WEIGHTS_SYNTHETIC_CONTRACT",
+  "production_usable": false
+}

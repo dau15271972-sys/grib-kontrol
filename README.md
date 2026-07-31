@@ -5,9 +5,12 @@
 
 ## Текущее состояние
 
-Этап A намеренно не содержит production-модели. Старый распознаватель по
-цветовым гистограммам удалён. Пока совместимый проверенный bundle не установлен
-и не прошёл `ArtifactCompatibilityGate`, оба приложения возвращают только:
+Stage A закрыт. Текущий Stage B0 строит архитектуру обязательного автономного
+пакета знаний. Распознавание возможно только при наличии установленного,
+полностью проверенного, совместимого, trusted и active файла `.gribpack`.
+
+Пакет не входит в APK. Текущего production-пакета ещё нет. Без active pack,
+при повреждении или несовместимости оба приложения возвращают только:
 
 ```text
 RECOGNITION_UNAVAILABLE
@@ -16,6 +19,10 @@ RECOGNITION_UNAVAILABLE
 Приложение не определяет, можно ли употреблять гриб, и не выдаёт итоговый статус
 `SAFE`.
 
+Репозиторий содержит только маленький распакованный synthetic fixture для
+проверки contracts. Он имеет `production_approved=false`, не содержит модели,
+фотографий или реальных таксонов и не может быть активирован для распознавания.
+
 ## Структура
 
 - `android-app/` — Android-приложение на Kotlin, Compose и CameraX.
@@ -23,12 +30,18 @@ RECOGNITION_UNAVAILABLE
 - `desktop/` — локальный запуск Flask в desktop-режиме.
 - `data/` — закрытые справочные данные; они не являются моделью и не выводятся
   пользователю как разрешение на употребление.
+- `data/reference-pack/` — schemas, templates и synthetic fixture обязательного
+  offline knowledge pack.
 - `scripts/safety_gate.py` — проверки запрещённых UI-фраз и неподвязанных
   model-assets.
 - `tests/` — Python-тесты безопасного поведения.
 
 Сетевой доступ не входит в путь инференса. Android хранит снимки только во
 временном app-private cache и удаляет снимок при замене и завершении сессии.
+Для будущего `.gribpack` определён потоковый Storage Access Framework contract,
+app-specific staging, проверки, atomic activation и rollback. Production
+copier/extractor/signature verifier на Stage B0 ещё не реализованы, поэтому
+активация намеренно недоступна.
 
 ## Python и desktop
 
@@ -37,6 +50,8 @@ python -m venv .venv
 .venv\Scripts\python.exe -m pip install -r requirements-dev.txt
 .venv\Scripts\python.exe -m pytest
 .venv\Scripts\python.exe -m ruff check .
+.venv\Scripts\python.exe scripts\validate_taxonomy.py
+.venv\Scripts\python.exe scripts\validate_reference_pack.py
 .venv\Scripts\python.exe desktop\run_desktop.py
 ```
 

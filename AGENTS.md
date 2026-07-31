@@ -47,22 +47,34 @@ taxonomic match and is never an edibility or safety conclusion.
 
 ## Current implementation stage
 
-Only Stage A is in scope until all Stage A tests and its report are complete.
-Do not add BioCLIP, MobileNet, EfficientNet, TFLite/LiteRT inference, training,
-distillation, production prototypes, segmentation, calibration, open-set
-scoring, regional priors, production `RiskEngine`, `.gribpack`, network review,
-or unapproved production medical instructions.
+SAFETY: Stage A is closed. The current stage is:
 
-Without an approved production bundle, all inference implementations must
-return `RECOGNITION_UNAVAILABLE`.
+`Stage B0 — Mandatory Offline Knowledge Pack Architecture`.
+
+Stage B0 permits contracts, manifest and import/storage architecture,
+compatibility gates, synthetic fixtures, fail-closed runtime, vector-search
+abstractions, tests and documentation.
+
+Stage B0 forbids production inference, real models or photographs, a real ANN
+index, BioCLIP, training, weakened open-set or RiskEngine behavior, raw
+similarity in UI/API, and any result based on one nearest reference image.
+
+SAFETY: a fully validated, compatible, trusted and active `.gribpack` is
+mandatory for recognition. Without it, every inference surface must return
+`RECOGNITION_UNAVAILABLE`; no fallback recognizer is allowed.
 
 ## Architecture expectations
 
 - Android capture, quality, inference, artifact, safety, emergency, history,
   and UI responsibilities stay separated.
 - `InferenceEngine` is the only inference contract.
-- `NoModelInferenceEngine` is the default implementation during Stage A.
+- `NoModelInferenceEngine` remains the default implementation during Stage B0.
 - `ArtifactCompatibilityGate` must run before any future production inference.
+- Pack import must finish checksum, signature, compatibility and runtime-open
+  verification before atomic activation; failed updates preserve the previous
+  active pack.
+- ANN may retrieve internal candidates only. Exact reranking, multi-view
+  evidence and the future RiskEngine remain separate safety-reviewed stages.
 - Observation sessions identify explicit view types; transformed copies are
   not independent observations.
 - Bounding boxes, crops, and nullable masks are distinct types.
@@ -88,7 +100,7 @@ content. The reference and production UI must not contain edible labels,
 confidence percentages, second/third tests, low-risk claims, mushroom names as
 an inference result, or permission to collect, cook, or consume.
 
-## Required verification for Stage A
+## Required verification for Stage B0
 
 Run and report all of the following:
 
@@ -103,6 +115,8 @@ Run and report all of the following:
 - unbound model asset test
 - `ArtifactCompatibilityGate` tests
 - emergency-access tests
+- taxonomy and reference-pack validators
+- mandatory-pack and vector-search contract tests
 
 Do not hide failures, unavailable dependencies, build problems, or data
 limitations. Do not move to the next major stage until tests and the Stage A

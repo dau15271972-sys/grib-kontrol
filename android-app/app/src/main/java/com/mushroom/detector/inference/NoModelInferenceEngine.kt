@@ -14,7 +14,7 @@ class NoModelInferenceEngine : InferenceEngine {
             status = ResultStatus.RECOGNITION_UNAVAILABLE,
             title = "Распознавание недоступно",
             message = (
-                "Совместимая проверенная модель не установлена. " +
+                "Активный проверенный автономный пакет знаний не установлен. " +
                     "По фотографиям нельзя надёжно исключить опасный вариант."
                 ),
             safetyBanner = (

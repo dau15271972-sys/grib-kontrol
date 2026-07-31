@@ -1,0 +1,6 @@
+{
+  "status": "NOT_RUN_FOR_PRODUCTION",
+  "vector_counts_planned": [10000, 100000, 1000000],
+  "recall_threshold": "OPEN_SAFETY_PARAMETER",
+  "production_decision": "NOT_YET_APPROVED"
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0.0",
+  "observations": [
+    {"observation_id": "obs_alpha", "region_id": "region_synthetic", "view_types": ["CAP_TOP", "UNDERSIDE"]},
+    {"observation_id": "obs_beta", "region_id": "region_synthetic", "view_types": ["CAP_TOP"]},
+    {"observation_id": "obs_gamma", "region_id": "region_synthetic", "view_types": ["UNDERSIDE"]}
+  ]
+}
