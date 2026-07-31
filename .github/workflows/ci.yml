@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  push:
+    branches: ["main", "chore/**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python -m ruff check .
+      - run: python -m pytest
+      - name: Forbidden UI phrase and unbound model asset gates
+        run: python scripts/safety_gate.py
+      - name: Validate explicit medical placeholder
+        run: python scripts/medical_placeholder_gate.py
+      - name: Prove production is blocked by unapproved medical copy
+        shell: bash
+        run: |
+          if python scripts/medical_placeholder_gate.py --production; then
+            echo "SAFETY gate unexpectedly allowed production"
+            exit 1
+          fi
+
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate Gradle Wrapper
+        uses: gradle/actions/wrapper-validation@v4
+      - name: Validate pinned Wrapper contract
+        run: python scripts/validate_gradle_wrapper.py
+      - name: Android unit tests
+        working-directory: android-app
+        run: bash ./gradlew testDebugUnitTest
+      - name: Android lint
+        working-directory: android-app
+        run: bash ./gradlew lintDebug
+      - name: Android debug APK
+        working-directory: android-app
+        run: bash ./gradlew assembleDebug
+      - name: Prove Android release is blocked by unapproved medical copy
+        working-directory: android-app
+        shell: bash
+        run: |
+          if bash ./gradlew verifyEmergencyCopyApproval; then
+            echo "SAFETY gate unexpectedly allowed Android production"
+            exit 1
+          fi
+
+  desktop:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m venv .venv
+      - run: .venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+      - shell: powershell
+        run: .\scripts\build_desktop_exe.ps1
+      - shell: powershell
+        run: |
+          if (-not (Test-Path -LiteralPath "dist\GribKontrolDesktop\GribKontrolDesktop.exe")) {
+            throw "Desktop EXE not found"
+          }
